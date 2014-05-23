@@ -1113,6 +1113,14 @@ bool PowerCubeCtrl::getStatus(PC_CTRL_STATUS& status, std::vector<std::string>& 
 			errorMessages[i] = errorMsg.str();
 			StatusArray[i] =  PC_CTRL_ERR;
 		}
+    else if (!(m_pc_status & STATE_HOME_OK))
+		{	
+			//Stop(); // stop all motion
+			errorMsg << "Module with Id " << ModuleIDs[i];
+			errorMsg << ": Not referenced.";
+			errorMessages[i] = errorMsg.str();
+			StatusArray[i] =  PC_CTRL_OK;//PC_CTRL_NOT_REFERENCED;
+		}
     else
 		{
 			errorMsg << "Module with Id " << ModuleIDs[i];
